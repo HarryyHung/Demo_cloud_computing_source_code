@@ -28,6 +28,13 @@ const port = 3000
 
 app.use(express.static(path.join(__dirname, 'public'))); // luu anh (thu muc tinh)
 
+app.use(express.urlencoded({
+  extended: true
+})); //middleware
+app.use(express.json()); // gui tu code len
+
+// XMLHttpRequest, fetch, axios
+
 // HTTP logger
 // app.use(morgan('combined'));
 
@@ -50,6 +57,13 @@ app.get('/news', (req, res) => {
 
 app.get('/search', (req, res) => {
   res.render('search')
+});
+
+app.post('/search', (req, res) => {
+
+  // console.log(req.body); // lay du lieu da submit
+
+  res.send('')
 });
 
 app.listen(port, () => {
