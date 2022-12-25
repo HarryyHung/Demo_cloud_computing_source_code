@@ -26,11 +26,15 @@ const handlebars = require('express-handlebars')
 const { extname } = require('path')
 const port = 3000
 
+const route = require('./routes');
+
 app.use(express.static(path.join(__dirname, 'public'))); // luu anh (thu muc tinh)
 
 app.use(express.urlencoded({
   extended: true
-})); //middleware
+})); 
+
+//middleware
 app.use(express.json()); // gui tu code len
 
 // XMLHttpRequest, fetch, axios
@@ -46,25 +50,8 @@ app.set('view engine', 'hbs')
 app.set('views', path.join(__dirname, 'resources/views'));
 console.log(path.join(__dirname, 'resources/views'))
 
-app.get('/', (req, res) => {
-  res.render('home')
-});
-
-app.get('/news', (req, res) => {
-  console.log(req.query.q);
-  res.render('news')
-});
-
-app.get('/search', (req, res) => {
-  res.render('search')
-});
-
-app.post('/search', (req, res) => {
-
-  // console.log(req.body); // lay du lieu da submit
-
-  res.send('')
-});
+// routes init
+route(app);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
